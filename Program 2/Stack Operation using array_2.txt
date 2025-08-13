@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 5
+int stack[MAX];
+int top = -1;
+
+void push(int x) {
+    if (top >= MAX - 1) {
+        printf("\nStack Overflow\n");
+        return;
+    }
+    stack[++top] = x;
+}
+
+int pop() {
+    if (top < 0) {
+        printf("\nStack Underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+void view() {
+    if (top < 0) {
+        printf("\nStack is empty\n");
+    } else {
+        printf("\nStack contents (Top to Bottom):\n");
+        for (int i = top; i >= 0; i--) {
+            printf("  %d\n", stack[i]);
+        }
+    }
+}
+
+int main() {
+    int ch, val;
+    while (1) {
+        printf("\nSTACK OPERATION\n");
+        printf("1. PUSH\n2. POP\n3. VIEW\n4. QUIT\n");
+        printf("Enter Choice: ");
+        scanf("%d", &ch);
+
+        switch (ch) {
+            case 1:
+                printf("Enter Stack Element: ");
+                scanf("%d", &val);
+                push(val);
+                break;
+            case 2:
+                val = pop();
+                if (val != -1)
+                    printf("Popped Element: %d\n", val);
+                break;
+            case 3:
+                view();
+                break;
+            case 4:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid Choice\n");
+        }
+    }
+
+    return 0;
+}
